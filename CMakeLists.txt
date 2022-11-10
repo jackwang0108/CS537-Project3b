@@ -1,0 +1,10 @@
+project(project3b)
+
+cmake_minimum_required(VERSION 3.2)
+
+set(C_STANDARD 99)
+
+set(CXX_STANDARD 99)
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
