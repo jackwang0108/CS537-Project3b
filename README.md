@@ -9,7 +9,7 @@ CS537 Project3b codes by team Shihong Wang and Tong Xia.
 
 #### 2022.11.10: Project Instruction Released!
 
-Professor Remzi jusr released the instruction of project 3b.
+Professor Remzi just released the instruction of project 3b.
 
 
 
