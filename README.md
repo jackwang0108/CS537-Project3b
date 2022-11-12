@@ -13,7 +13,11 @@ Professor Remzi just released the instruction of project 3b.
 
 
 
+#### 2022.11.12: VSCode Debug Added!
 
+Successfully added `VSCode` debug configuration. Now just run `F5` to start debug.
+
+![VSCode F5 Debug](https://jack-1307599355.cos.ap-shanghai.myqcloud.com/深度录屏_code_20221112135840.gif)
 
 
 
