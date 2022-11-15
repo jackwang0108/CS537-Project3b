@@ -184,23 +184,31 @@ int growproc(int n)
 int fork(void)
 {
     int i, pid;
+    // Notes: np就是子进程
     struct proc *np;
     struct proc *curproc = myproc();
 
+    // allocproc将会在进程表中循找到一个状态为UNUSED的进程
+    // 如果找到的话，就会把该UNUSED进程的状态设置为EMBRYO，而后对该进程进行初始化，是的起能够在内核中运行
+    // 否则返回0
     // Allocate process.
     if ((np = allocproc()) == 0)
     {
         return -1;
     }
 
+    // copyuvm接受父进程的页表地址，而后为子进程复制一份父进程页表
+    // 如果成功则返回复制的页表的地址，否则返回0
     // Copy process state from proc.
     if ((np->pgdir = copyuvm(curproc->pgdir, curproc->sz)) == 0)
     {
+        // Notes: 这里就是处理复制失败后的代码，释放占用的stack，而后将状态设置为UNUSED
         kfree(np->kstack);
         np->kstack = 0;
         np->state = UNUSED;
         return -1;
     }
+    // Notes: 进程的大小，trapframe等等都是使用父进程的
     np->sz = curproc->sz;
     np->parent = curproc;
     *np->tf = *curproc->tf;
@@ -208,15 +216,19 @@ int fork(void)
     // Clear %eax so that fork returns 0 in the child.
     np->tf->eax = 0;
 
+    // filedup就是单纯的增加文件的引用计数，而后返回文件f
     for (i = 0; i < NOFILE; i++)
         if (curproc->ofile[i])
             np->ofile[i] = filedup(curproc->ofile[i]);
+    // idup增加当前在内存中的inode的引用计数，然后返回inode
     np->cwd = idup(curproc->cwd);
 
+    // safestrcpy类似于strncpy，但是会在复制完之后加一个'\0'
     safestrcpy(np->name, curproc->name, sizeof(curproc->name));
 
     pid = np->pid;
 
+    // 因为process table是全局共享的，所以需要使用锁来保护
     acquire(&ptable.lock);
 
     np->state = RUNNABLE;
