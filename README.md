@@ -23,6 +23,42 @@ Successfully added `VSCode` debug configuration. Now just run `F5` to start debu
 
 
 
+#### 2022.11.14: Test Released!
+
+From piazza: https://piazza.com/class/l7kt5onxp5h4hp/post/1523
+
+> Hi all,
+>
+> 
+>
+> **20 p3b tests** are released. You can find them under **~cs537-1/tests/p3b** folder. To run the test cases, go to your own directory containing xv6 code.
+>
+> ```
+> ~cs537-1/tests/p3b/run-tests.sh
+> ```
+>
+> The test script by default stops on the first test you failed. To prevent this behavior, run
+>
+> ```
+> ~cs537-1/tests/p3b/run-tests.sh -c
+> ```
+>
+> If you want to run a specific test, you can run
+>
+> ```
+> ~cs537-1/tests/p3b/run-tests.sh -t [test number]
+> ```
+>
+> p.s.: there will not be any hidden tests. :) 
+>
+> 
+>
+> If you're not able to run tests, increase FSSIZE in param.h
+>
+> ```
+> #define FSSIZE 20000 // size of file system in blocks
+> ```
+
 
 
 
