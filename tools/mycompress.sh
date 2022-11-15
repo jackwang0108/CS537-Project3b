@@ -14,8 +14,14 @@ fi
 echo "\033[0;32mMake cleaning...\033[0m"
 cd $shell_folder/../src
 make clean
-cd $shell_folder
+
+cd $pname
+mkdir $name
+cp -r src/* $name
 
 echo "\033[0;32mCompressing...\033[0m"
-tar czf "$shell_folder/../results/$name" -P "$shell_folder/../src"
-echo "\033[0;32m$name is writing to $pname/results...\033[0m"
+tar czf "results/$name" -P "$name"
+echo "$name is writing to $pname/results...\033[0m"
+echo '\033[0;32mRun `mkdir dir; tar xzvf $name -C dir` to extract...\033[0m'
+
+rm -r $name
